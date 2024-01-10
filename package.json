@@ -1,0 +1,33 @@
+{
+  "name": "news",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HuyNem/news.git"
+  },
+  "keywords": [
+    "news",
+    "thuc",
+    "tap",
+    "tot",
+    "nghiep"
+  ],
+  "author": "huydn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HuyNem/news/issues"
+  },
+  "homepage": "https://github.com/HuyNem/news#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
