@@ -1,1 +1,35 @@
-<h1>Quản lý tin tức</h1>
+<div class="container">
+    <div class="mt-4">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Tin tức</li>
+            </ol>
+        </nav>
+        <a href="tin-tuc/them-moi" type="button" class="btn btn-success">Thêm mới</a>
+        <table class="table table-responsive table-bordered table-hover mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">Mã</th>
+                    <th scope="col">Tiêu đề</th>
+                    <th scope="col">Danh mục</th>
+                    <th scope="col">Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each news}}
+                <tr>
+                    <th>{{this._id}}</th>
+                    <td>{{this.title}}</td>
+                    <td>{{this.category}}</td>
+                    <td>
+                        <a href="tin-tuc/chi-tiet/{{this._id}}" type="button" class="btn btn-primary">Chi tiết</a>
+                        <a href="#" type="button" class="btn btn-secondary">Sửa</a>
+                        <a href="#" type="button" class="btn btn-danger">Xóa</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

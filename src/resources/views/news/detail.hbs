@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="mt-4">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="/tin-tuc">Tin tức</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Chi tiết</li>
+            </ol>
+        </nav>
+        <div class="row">
+            <div class="col-lg-3">
+                <h5>Mã tin tức</h5>
+                <p>{{news._id}}</p>
+
+
+
+                <h5>Danh mục</h5>
+                <p>{{news.category}}</p>
+            </div>
+
+            <div class="col-lg-9">
+                <h5>Tiêu đề</h5>
+                <p>{{news.title}}</p>
+
+                <h5>Nội dung</h5>
+                <p>{{news.content}}</p>
+            </div>
+        </div>
+    </div>
+</div>
