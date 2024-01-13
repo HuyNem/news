@@ -2,16 +2,11 @@
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Tin tức</li>
+            <li class="breadcrumb-item"><a href="/tin-tuc">Tin tức</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Thùng rác</li>
         </ol>
     </nav>
-    <h4 class="text-center">Danh sách tin tức</h4>
-    <div class="d-flex justify-content-between">
-        <a href="tin-tuc/them-moi" type="button" class="btn btn-success"><i class="bi bi-plus-circle"></i> Thêm
-            mới</a>
-        <a href="/tin-tuc/thung-rac" type="button" class="btn btn-outline-primary"><i class="bi bi-trash"></i> Thùng
-            rác</a>
-    </div>
+    <h4 class="text-center">Tin tức đã xóa</h4>
     <table class="table table-responsive table-bordered table-hover mt-4">
         <thead>
             <tr>
@@ -32,18 +27,15 @@
                 <td>{{this.category}}</td>
                 <td>{{this.createdAt}}</td>
                 <td>
-                    {{!-- <a href="tin-tuc/chi-tiet/{{this._id}}" type="button" class="btn btn-primary">Chi tiết</a>
-                    --}}
-                    <a href="/tin-tuc/{{this._id}}/sua" type="button" class="btn btn-secondary"><i
-                            class="bi bi-pencil-square"></i></a>
+                    <a href="" type="button" class="btn btn-success btn-restore" data-id="{{this._id}}"><i
+                            class="bi bi-arrow-counterclockwise"></i></a>
                     <a href="" type="button" class="btn btn-danger" data-bs-toggle="modal"
-                        data-bs-target="#delete-news-modal" data-id="{{this._id}}"><i class="bi bi-trash-fill"></i></a>
+                        data-bs-target="#delete-news-modal" data-id="{{this._id}}"><i class="bi bi-trash"></i></a>
                 </td>
             </tr>
             {{else}}
             <tr>
-                <td colspan="6" class="text-center">Danh sách trống,
-                    <a href="/tin-tuc/them-moi">thêm mới tin tức</a>
+                <td colspan="6" class="text-center">Thùng rác trống
                 </td>
             </tr>
             {{/each}}
@@ -61,11 +53,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Bạn có chắc không?
+                Hành động này không thể khôi phục. Bạn chắc không?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button id="btn-delete-news" type="button" class="btn btn-danger">Xóa</button>
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button id="btn-delete-news" type="button" class="btn btn-danger">Xóa vĩnh viễn</button>
             </div>
         </div>
     </div>
@@ -73,13 +65,19 @@
 
 {{!-- delete hidden form --}}
 <form method="post" name="delete-news-form">
+</form>
 
+{{!-- restore hidden form --}}
+<form method="post" name="restore-news-form">
 </form>
 
 <script defer>
     document.addEventListener('DOMContentLoaded', function () {
         const deleteModal = document.getElementById('delete-news-modal');
-        var deleteForm = document.forms['delete-news-form'];
+        const deleteForm = document.forms['delete-news-form'];
+        const restoreForm = document.forms['restore-news-form'];
+
+        const restoreBtns = document.querySelectorAll('.btn-restore');
 
         if (deleteModal) {
             deleteModal.addEventListener('show.bs.modal', function (event) {
@@ -90,11 +88,21 @@
                 var btnDeleteNews = document.getElementById('btn-delete-news');
 
                 btnDeleteNews.onclick = function () {
-                    deleteForm.action = '/tin-tuc/' + id + '?_method=DELETE';
+                    deleteForm.action = '/tin-tuc/' + id + '/xoa/?_method=DELETE';
                     deleteForm.submit();
                 }
             });
         }
+
+        restoreBtns.forEach(function (restoreBtn) {
+            restoreBtn.addEventListener('click', function (event) {
+                var id = this.getAttribute('data-id');
+                restoreForm.action = '/tin-tuc/' + id + '/khoi-phuc?_method=PATCH';
+                restoreForm.submit();
+                event.preventDefault();
+            });
+        });
+
     });
 
 

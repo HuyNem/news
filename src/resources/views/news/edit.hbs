@@ -4,27 +4,31 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
                 <li class="breadcrumb-item"><a href="/tin-tuc">Tin tức</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Thêm mới</li>
+                <li class="breadcrumb-item active" aria-current="page">Chỉnh sửa</li>
             </ol>
         </nav>
 
-        <form method="post" action="/tin-tuc/store">
+        <form method="post" action="/tin-tuc/{{news._id}}?_method=PUT">
             <div class="mb-3">
                 <label for="title" class="form-label">Tiêu đề</label>
-                <input type="text" class="form-control" id="title" name="title" placeholder="Nhập tiêu đề...">
+                <input type="text" class="form-control" value="{{news.title}}" id="title" name="title"
+                    placeholder="Nhập tiêu đề...">
             </div>
 
             <div class="mb-3">
                 <label for="category" class="form-label">Danh mục</label>
-                <input type="text" class="form-control" id="category" name="category" placeholder="Danh mục...">
+                <input type="text" class="form-control" value="{{news.category}}" id="category" name="category"
+                    placeholder="Danh mục...">
             </div>
 
             <div class="mb-3">
                 <label for="content" class="form-label">Nội dung</label>
                 <textarea class="form-control" id="content" name="content" placeholder="Nhập nội dung..."
-                    rows="7"></textarea>
+                    rows="15">{{news.content}}</textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Đăng</button>
+            <button type="submit" class="btn btn-primary">Lưu lại</button>
         </form>
+
+
     </div>
