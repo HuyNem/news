@@ -29,8 +29,9 @@ app.engine(
     extname: '.hbs',
     helpers: {
       sum: (a, b) => a + b,
-      }
-    }));
+      eq: (c, d) => c === d,
+    }
+  }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
 

@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="mt-4">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="/danh-muc">Danh mục</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Chỉnh sửa</li>
+            </ol>
+        </nav>
+        <div class="col-6">
+            <form method="post" action="/danh-muc/{{category._id}}?_method=PUT">
+                <div class="mb-3">
+                    <label for="category" class="form-label">Danh mục</label>
+                    <input type="text" class="form-control" value="{{category.category}}" id="category" name="category"
+                        placeholder="Danh mục...">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Lưu lại</button>
+            </form>
+        </div>
+    </div> 
+</div>

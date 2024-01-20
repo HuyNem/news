@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="mt-4">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="/danh-muc">Danh mục</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Thêm mới</li>
+            </ol>
+        </nav>
+
+        <h3>Thêm danh mục</h3>
+        <form method="post" action="/danh-muc/store">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="category" class="form-label">Danh mục</label>
+                    <input type="text" class="form-control" id="category" name="category"
+                        placeholder="Nhập danh mục...">
+                </div>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+            </div>
+
+
+        </form>
+    </div>
+</div>

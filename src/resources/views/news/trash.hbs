@@ -7,14 +7,13 @@
         </ol>
     </nav>
     <h4 class="text-center">Tin tức đã xóa</h4>
-    <table class="table table-responsive table-bordered table-hover mt-4">
+    <table class="table table-bordered mt-4" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Mã</th>
                 <th scope="col">Tiêu đề</th>
                 <th scope="col">Danh mục</th>
-                <th scope="col">Ngày đăng</th>
                 <th scope="col">Chức năng</th>
             </tr>
         </thead>
@@ -25,7 +24,6 @@
                 <td>{{this._id}}</td>
                 <td>{{this.title}}</td>
                 <td>{{this.category}}</td>
-                <td>{{this.createdAt}}</td>
                 <td>
                     <a href="" type="button" class="btn btn-success btn-restore" data-id="{{this._id}}"><i
                             class="bi bi-arrow-counterclockwise"></i></a>

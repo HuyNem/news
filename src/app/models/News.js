@@ -7,9 +7,12 @@ const Schema = mongoose.Schema;
 const News = new Schema({
   title: { type: String },
   content: { type: String },
-  category: { type: String },
+  categoryId: { 
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "Category"
+  },
 }, { timestamps: true, });
 
 News.plugin(mongooseDelete, { deletedAt: true, overrideMethods: 'all' })
 
-module.exports = mongoose.model('News', News);
+module.exports = mongoose.model('News', News) ;

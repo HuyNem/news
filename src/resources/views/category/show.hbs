@@ -1,0 +1,95 @@
+<div class="mt-4" style="padding: 0px 15px;">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Danh mục</li>
+        </ol>
+    </nav>
+
+    <div class="col-6">
+        <h4 class="">Danh sách Danh mục</h4>
+        <div class="d-flex justify-content-between">
+            <a href="/danh-muc/them-moi" type="button" class="btn btn-success">Thêm mới</a>
+            <a href="/danh-muc/thung-rac" type="button" class="btn btn-primary" style="height:32px"><i
+                    class="bi bi-trash"></i></a>
+        </div>
+        <table class="table table-bordered mt-4" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Danh mục</th>
+                    <th scope="col">Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each category}}
+                <tr>
+                    <th>{{sum @index 1}}</th>
+                    <td>{{this.category}}</td>
+
+                    <td>
+                        <a href="/danh-muc/{{this._id}}/sua" type="button" class="btn btn-secondary"><i
+                                class="bi bi-pencil-square"></i></a>
+                        <a href="" type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#delete-category-modal" data-id="{{this._id}}"><i
+                                class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="6" class="text-center">Danh sách trống,
+                        <a href="/danh-muc/them-moi">thêm mới danh mục</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="delete-category-modal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteModalLabel">Xóa danh mục</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button id="btn-delete-category" type="button" class="btn btn-danger">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- delete hidden form --}}
+<form method="post" name="delete-category-form">
+
+</form>
+
+<script defer>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteModal = document.getElementById('delete-category-modal');
+        var deleteForm = document.forms['delete-category-form'];
+
+        if (deleteModal) {
+            deleteModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+
+                const id = button.getAttribute('data-id');
+
+                var btnDeleteCategory = document.getElementById('btn-delete-category');
+
+                btnDeleteCategory.onclick = function () {
+                    deleteForm.action = '/danh-muc/' + id + '/xoa?_method=DELETE';
+                    deleteForm.submit();
+                }
+            });
+        }
+    });
+</script>

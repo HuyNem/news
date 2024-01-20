@@ -17,8 +17,13 @@
 
             <div class="mb-3">
                 <label for="category" class="form-label">Danh mục</label>
-                <input type="text" class="form-control" value="{{news.category}}" id="category" name="category"
-                    placeholder="Danh mục...">
+                <select class="form-select" name="categoryId" id="">
+                    {{#each categories}}
+                    <option value="{{this._id}}">
+                        {{this.category}}
+                    </option>
+                    {{/each}}
+                </select>
             </div>
 
             <div class="mb-3">

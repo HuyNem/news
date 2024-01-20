@@ -1,11 +1,25 @@
 const News = require('../models/News');
+const Category = require('../models/Category');
 const { multipleMongooseToObject } = require('../../ulti/mongoose')
 const { mongooseToObject } = require('../../ulti/mongoose')
 
 class SiteController {
+
     async index(req, res, next) {
+        // Promise.all([News.find({}), News.countDocumentsWithDeleted()])
+        //     .then(([news, deletedCount]) => {
+        //         res.render('news/show', { deletedCount, news: multipleMongooseToObject(news) })
+        //     })
+        //     .catch(next);
+
+        // News.countDocumentsWithDeleted()
+        //     .then((deletedCount) => {
+        //         console.log(deletedCount);
+        //     })
+        //     .catch(() => { });
 
         News.find({})
+            .populate('categoryId', 'category')
             .then(news => {
                 res.render('news/show', { news: multipleMongooseToObject(news) })
             })
@@ -22,12 +36,17 @@ class SiteController {
     }
 
 
-    //[GET]
+    //[GET] /tin-tuc/them-moi
     create(req, res, next) {
-        res.render('news/create');
+        // res.render('news/create');
+        Category.find({})
+            .then(category => {
+                res.render('news/create', { category: multipleMongooseToObject(category) })
+            })
+            .catch(error => next(error));
     }
 
-    //[POST]
+    //[POST] /tin-tuc/store
     store(req, res, next) {
         const news = new News(req.body);
         news.save()
@@ -40,6 +59,7 @@ class SiteController {
     //[GET]
     detail(req, res, next) {
         News.findOne({ _id: req.params._id })
+            .populate('categoryId', 'category')
             .then(news => {
                 res.render('news/detail', { news: mongooseToObject(news) });
             })
@@ -48,11 +68,24 @@ class SiteController {
 
     //[GET] /tin-tuc/:id/edit
     edit(req, res, next) {
-        News.findById({ _id: req.params.id })
-            .then(news => {
-                res.render('news/edit', { news: mongooseToObject(news) });
+
+        Promise.all([
+            News.findById({ _id: req.params.id })
+                .populate('categoryId', 'category'),
+            Category.find({}),
+        ])
+            .then(([news, categories]) => {
+                res.render('news/edit', { news: mongooseToObject(news), categories: multipleMongooseToObject(categories), });
+                // res.send(news.categoryId._id)
+                // res.send(categories._id)
             })
             .catch(next);
+
+        // News.findById({ _id: req.params.id })
+        //     .then(news => {
+        //         res.render('news/edit', { news: mongooseToObject(news) });
+        //     })
+        //     .catch(next);
     }
 
     //[PUT] /tin-tuc/:id

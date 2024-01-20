@@ -7,19 +7,17 @@
     </nav>
     <h4 class="text-center">Danh sách tin tức</h4>
     <div class="d-flex justify-content-between">
-        <a href="tin-tuc/them-moi" type="button" class="btn btn-success"><i class="bi bi-plus-circle"></i> Thêm
-            mới</a>
-        <a href="/tin-tuc/thung-rac" type="button" class="btn btn-outline-primary"><i class="bi bi-trash"></i> Thùng
-            rác</a>
+        <a href="tin-tuc/them-moi" type="button" class="btn btn-success">Thêm mới</a>
+        <a href="/tin-tuc/thung-rac" type="button" class="btn btn-primary" style="height:32px"><i
+                class="bi bi-trash"></i></a>
     </div>
-    <table class="table table-responsive table-bordered table-hover mt-4">
+    <table class="table table-bordered mt-4" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Mã</th>
                 <th scope="col">Tiêu đề</th>
                 <th scope="col">Danh mục</th>
-                <th scope="col">Ngày đăng</th>
                 <th scope="col">Chức năng</th>
             </tr>
         </thead>
@@ -29,15 +27,17 @@
                 <th>{{sum @index 1}}</th>
                 <td>{{this._id}}</td>
                 <td>{{this.title}}</td>
-                <td>{{this.category}}</td>
-                <td>{{this.createdAt}}</td>
+                <td>{{this.categoryId.category}}</td>
+
                 <td>
                     {{!-- <a href="tin-tuc/chi-tiet/{{this._id}}" type="button" class="btn btn-primary">Chi tiết</a>
                     --}}
+                    <a href="tin-tuc/chi-tiet/{{this._id}}" type="button" class="btn btn-primary"><i
+                            class="fa fa-info-circle"></i></a>
                     <a href="/tin-tuc/{{this._id}}/sua" type="button" class="btn btn-secondary"><i
                             class="bi bi-pencil-square"></i></a>
                     <a href="" type="button" class="btn btn-danger" data-bs-toggle="modal"
-                        data-bs-target="#delete-news-modal" data-id="{{this._id}}"><i class="bi bi-trash-fill"></i></a>
+                        data-bs-target="#delete-news-modal" data-id="{{this._id}}"><i class="fas fa-trash"></i></a>
                 </td>
             </tr>
             {{else}}
@@ -96,6 +96,4 @@
             });
         }
     });
-
-
 </script>
